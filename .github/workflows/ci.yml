@@ -81,11 +81,7 @@ jobs:
       # Resolve D1 database id dynamically from the account (via API token),
       # so deploys never break when the database is recreated and its UUID
       # changes. Falls back to the id committed in wrangler.jsonc.
-<<<<<<< HEAD
       - name: Resolve D1 database id (create if missing, delete stale binding)
-=======
-      - name: Resolve D1 database id (create if missing)
->>>>>>> origin/main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -126,7 +122,22 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: pnpm exec wrangler deploy
+        run: |
+          if grep -q '<<<<<<<\|>>>>>>>' .github/workflows/ci.yml 2>/dev/null; then
+            echo "::error::Merge conflict markers found in workflow file!"
+            exit 1
+          fi
+          # Sanity check: the D1 uuid currently configured must exist in this account.
+          DB_ID=$(node -e "const s=require('fs').readFileSync('wrangler.jsonc','utf8');console.log(s.match(/\"database_id\":\s*\"([^\"]+)\"/)[1])")
+          EXISTS=$(curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/d1/database/$DB_ID" \
+            | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{console.log(JSON.parse(d).success?'yes':'no')}catch(e){console.log('no')}})")
+          if [ "$EXISTS" != "yes" ]; then
+            echo "::error::D1 database id $DB_ID does not exist in the account targeted by CLOUDFLARE_API_TOKEN/CLOUDFLARE_ACCOUNT_ID. Check that the GitHub Secrets point to the same Cloudflare account that owns duit-db."
+            exit 1
+          fi
+          echo "D1 database $DB_ID verified present in account. Deploying..."
+          pnpm exec wrangler deploy
 
       # Note: PASSWORD_PEPPER is a worker secret — set once out of band via
       # `wrangler secret put PASSWORD_PEPPER` (or the Cloudflare dashboard).
