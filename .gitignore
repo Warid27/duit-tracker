@@ -1,6 +1,14 @@
+# Dependencies
 node_modules/
+
+# Build artifacts and caches
 dist/
-.wrangler/
+build/
+.vite/
+*.tsbuildinfo
+# Editor/OS
+.DS_Store
+
+# Local env & logs
 .dev.vars
 *.log
-.DS_Store

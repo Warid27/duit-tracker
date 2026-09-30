@@ -22,7 +22,7 @@
     {
       "binding": "DB",
       "database_name": "duit-db",
-      "database_id": "867931b4-054e-4a42-b265-086f174d62bd",
+      "database_id": "REPLACE_WITH_ID_FROM_wrangler_d1_create",
       "migrations_dir": "migrations",
     },
   ],
