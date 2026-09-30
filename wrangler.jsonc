@@ -22,7 +22,7 @@
     {
       "binding": "DB",
       "database_name": "duit-db",
-      "database_id": "867931b4-054e-4a42-b265-086f174d62bd",
+      "database_id": "b04ff234-4507-4de7-90f5-16c2bd7fda02",
       "migrations_dir": "migrations",
     },
   ],
