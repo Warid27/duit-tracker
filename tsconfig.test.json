@@ -23,5 +23,5 @@
       "@worker/*": ["src/worker/*"]
     }
   },
-  "include": ["tests/**/*", "scripts/**/*", "src/shared/**/*"]
+  "include": ["tests/**/*", "scripts/**/*", "src/shared/**/*", "src/worker/**/*"]
 }
