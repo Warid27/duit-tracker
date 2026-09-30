@@ -78,12 +78,10 @@ jobs:
       - name: Build (produces dist/ required by wrangler assets.directory)
         run: pnpm build
 
-      - name: Apply D1 migrations
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: pnpm exec wrangler d1 migrations apply duit-db --remote
-
+      # Note: `wrangler deploy` applies pending D1 migrations automatically.
+      # A separate `d1 migrations apply` step is intentionally omitted because
+      # the GitHub secret token (Edit Cloudflare Workers template) lacks the
+      # D1 "query" permission and would fail with API error 7404.
       - name: Deploy to Cloudflare Workers
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
