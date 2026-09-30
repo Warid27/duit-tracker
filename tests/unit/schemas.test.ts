@@ -46,8 +46,12 @@ describe('passwordSchema / register / login', () => {
   })
 
   it('changePassword validates both fields', () => {
-    expect(changePasswordSchema.safeParse({ currentPassword: 'oldpass', newPassword: '1234567' }).success).toBe(false)
-    expect(changePasswordSchema.safeParse({ currentPassword: 'oldpass', newPassword: 'newpassword' }).success).toBe(true)
+    expect(
+      changePasswordSchema.safeParse({ currentPassword: 'oldpass', newPassword: '1234567' }).success,
+    ).toBe(false)
+    expect(
+      changePasswordSchema.safeParse({ currentPassword: 'oldpass', newPassword: 'newpassword' }).success,
+    ).toBe(true)
   })
 })
 
@@ -59,8 +63,13 @@ describe('createWalletSchema', () => {
   })
 
   it('allows negative balances (credit cards) but not floats', () => {
-    expect(createWalletSchema.safeParse({ name: 'CC', kind: 'bank', currentBalance: -1_500_000, color: 'clay' }).success).toBe(true)
-    expect(createWalletSchema.safeParse({ name: 'CC', currentBalance: 1.5, color: 'clay' }).success).toBe(false)
+    expect(
+      createWalletSchema.safeParse({ name: 'CC', kind: 'bank', currentBalance: -1_500_000, color: 'clay' })
+        .success,
+    ).toBe(true)
+    expect(createWalletSchema.safeParse({ name: 'CC', currentBalance: 1.5, color: 'clay' }).success).toBe(
+      false,
+    )
   })
 
   it('rejects unknown colors/kinds and empty names', () => {

@@ -21,24 +21,15 @@ import {
 // ---------------------------------------------------------------------------
 
 const trimmedString = (min: number, max: number, label: string) =>
-  z
-    .string()
-    .trim()
-    .min(min, `${label} tidak boleh kosong.`)
-    .max(max, `${label} maksimal ${max} karakter.`)
+  z.string().trim().min(min, `${label} tidak boleh kosong.`).max(max, `${label} maksimal ${max} karakter.`)
 
 const trimmedOptionalString = (max: number, label: string) =>
-  z
-    .string()
-    .trim()
-    .max(max, `${label} maksimal ${max} karakter.`)
+  z.string().trim().max(max, `${label} maksimal ${max} karakter.`)
 
 const idSchema = z.string().min(1).max(64)
 
 /** `YYYY-MM-DD` calendar date. */
-export const dateStringSchema = z
-  .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, 'Format tanggal tidak valid.')
+export const dateStringSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Format tanggal tidak valid.')
 
 /** `YYYY-MM` month key. */
 export const monthStringSchema = z.string().regex(/^\d{4}-\d{2}$/, 'Format bulan tidak valid.')

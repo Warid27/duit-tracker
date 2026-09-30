@@ -1,0 +1,3 @@
+# Ignore generated/vendored files in format check
+pnpm-lock.yaml
+worker-configuration.d.ts

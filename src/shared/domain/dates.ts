@@ -76,7 +76,10 @@ export function monthRange(key: string): { first: string; last: string } {
   const parsed = tryParseMonth(key)
   if (!parsed) throw new RangeError(`Invalid month key: ${key}`)
   const { year, month } = parsed
-  return { first: `${year}-${pad2(month)}-01`, last: toDateString({ year, month, day: daysInMonth(year, month) }) }
+  return {
+    first: `${year}-${pad2(month)}-01`,
+    last: toDateString({ year, month, day: daysInMonth(year, month) }),
+  }
 }
 
 export function addMonths(key: string, delta: number): string {
@@ -84,7 +87,7 @@ export function addMonths(key: string, delta: number): string {
   if (!parsed) throw new RangeError(`Invalid month key: ${key}`)
   const total = parsed.year * 12 + (parsed.month - 1) + delta
   const year = Math.floor(total / 12)
-  const month = (total % 12 + 12) % 12 + 1
+  const month = (((total % 12) + 12) % 12) + 1
   return `${year}-${pad2(month)}`
 }
 
@@ -143,20 +146,7 @@ export function addDaysIso(instant: Date, days: number): Date {
 }
 
 const DAY_NAMES = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab']
-const MONTH_NAMES = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'Mei',
-  'Jun',
-  'Jul',
-  'Agu',
-  'Sep',
-  'Okt',
-  'Nov',
-  'Des',
-]
+const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
 
 /** Short Indonesian weekday name for a `YYYY-MM-DD` date (uses UTC fields; date-only so safe). */
 export function shortDayName(date: string): string {

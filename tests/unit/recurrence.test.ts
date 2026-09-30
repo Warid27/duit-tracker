@@ -21,7 +21,9 @@ describe('nextOccurrence — strictly after fromDate', () => {
   })
 
   it('returns null past endDate', () => {
-    expect(nextOccurrence({ frequency: 'daily', startDate: '2026-09-01' }, '2026-09-10', '2026-09-10')).toBeNull()
+    expect(
+      nextOccurrence({ frequency: 'daily', startDate: '2026-09-01' }, '2026-09-10', '2026-09-10'),
+    ).toBeNull()
   })
 
   it('rejects invalid dates', () => {
@@ -97,7 +99,7 @@ describe('occurrencesBetween (catch-up processing)', () => {
   })
 
   it('stops at endDate even inside the window', () => {
-    const anchor = { frequency: 'monthly' as const, startDate: '2026-01-15', }
+    const anchor = { frequency: 'monthly' as const, startDate: '2026-01-15' }
     const runs = occurrencesBetween(anchor, '2026-01-01', '2026-12-31', '2026-04-30', 100)
     expect(runs).toEqual(['2026-01-15', '2026-02-15', '2026-03-15', '2026-04-15'])
   })

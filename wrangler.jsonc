@@ -10,7 +10,7 @@
   "assets": {
     "directory": "./dist/client",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*"],
   },
 
   "routes": [{ "pattern": "duit.warid.web.id", "custom_domain": true }],
@@ -23,15 +23,15 @@
       "binding": "DB",
       "database_name": "duit-db",
       "database_id": "REPLACE_WITH_ID_FROM_wrangler_d1_create",
-      "migrations_dir": "migrations"
-    }
+      "migrations_dir": "migrations",
+    },
   ],
 
   "vars": {
     "APP_TIMEZONE": "Asia/Jakarta",
     "REGISTRATION_ENABLED": "true",
     "PBKDF2_ITERATIONS": "100000",
-    "SESSION_TTL_DAYS": "90"
-  }
+    "SESSION_TTL_DAYS": "90",
+  },
   // Secret (NOT here): PASSWORD_PEPPER — set via CI secret or `wrangler secret put PASSWORD_PEPPER`
 }

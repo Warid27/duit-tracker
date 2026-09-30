@@ -1,5 +1,12 @@
 // Recurrence math (BR-11..BR-13). Pure & deterministic.
-import { addDays, daysInMonth, setDateKeepingAnchor, toDateString, tryParseDate, type DateParts } from './dates'
+import {
+  addDays,
+  daysInMonth,
+  setDateKeepingAnchor,
+  toDateString,
+  tryParseDate,
+  type DateParts,
+} from './dates'
 
 export type Frequency = 'daily' | 'weekly' | 'monthly' | 'yearly'
 
@@ -14,13 +21,21 @@ export type RecurringAnchor = {
  * Monthly/yearly clamp to the last day of short months (BR-12):
  * anchor day is taken from `startDate`, never from the previous run, so no drift.
  */
-export function nextOccurrence(anchor: RecurringAnchor, fromDate: string, endDate?: string | null): string | null {
+export function nextOccurrence(
+  anchor: RecurringAnchor,
+  fromDate: string,
+  endDate?: string | null,
+): string | null {
   const n = nextOnOrAfter(anchor, addDay(fromDate, 1), endDate)
   return n
 }
 
 /** First occurrence on or after `fromDate` (inclusive), clamped by endDate. */
-export function nextOnOrAfter(anchor: RecurringAnchor, fromDate: string, endDate?: string | null): string | null {
+export function nextOnOrAfter(
+  anchor: RecurringAnchor,
+  fromDate: string,
+  endDate?: string | null,
+): string | null {
   const start = tryParseDate(anchor.startDate)
   const from = tryParseDate(fromDate)
   if (!start || !from) return null

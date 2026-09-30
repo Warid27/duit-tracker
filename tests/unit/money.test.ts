@@ -1,10 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import {
-  formatDigitsGrouping,
-  formatRupiah,
-  isValidAmount,
-  parseRupiahInput,
-} from '@shared/domain/money'
+import { formatDigitsGrouping, formatRupiah, isValidAmount, parseRupiahInput } from '@shared/domain/money'
 import { MAX_AMOUNT } from '@shared/constants'
 
 describe('formatRupiah (BR-16)', () => {

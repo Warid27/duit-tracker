@@ -29,12 +29,7 @@ export type BudgetStatus = 'ok' | 'warning' | 'over'
 export const WALLET_KINDS: readonly WalletKind[] = ['cash', 'bank', 'ewallet', 'other']
 export const CATEGORY_KINDS: readonly CategoryKind[] = ['income', 'expense']
 export const TRANSACTION_TYPES: readonly TransactionType[] = ['income', 'expense', 'transfer']
-export const RECURRING_FREQUENCIES: readonly RecurringFrequency[] = [
-  'daily',
-  'weekly',
-  'monthly',
-  'yearly',
-]
+export const RECURRING_FREQUENCIES: readonly RecurringFrequency[] = ['daily', 'weekly', 'monthly', 'yearly']
 
 /** Data-viz palette (spec 12.3). Stored by token name, never raw hex. */
 export const PALETTE = {
