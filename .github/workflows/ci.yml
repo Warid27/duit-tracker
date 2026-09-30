@@ -123,10 +123,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          if grep -q '<<<<<<<\|>>>>>>>' .github/workflows/ci.yml 2>/dev/null; then
-            echo "::error::Merge conflict markers found in workflow file!"
-            exit 1
-          fi
+          # (Guard against committed merge-conflict markers removed here — see PR #9 history.)
           # Sanity check: the D1 uuid currently configured must exist in this account.
           DB_ID=$(node -e "const s=require('fs').readFileSync('wrangler.jsonc','utf8');console.log(s.match(/\"database_id\":\s*\"([^\"]+)\"/)[1])")
           EXISTS=$(curl -sS -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
