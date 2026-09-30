@@ -81,7 +81,11 @@ jobs:
       # Resolve D1 database id dynamically from the account (via API token),
       # so deploys never break when the database is recreated and its UUID
       # changes. Falls back to the id committed in wrangler.jsonc.
+<<<<<<< HEAD
       - name: Resolve D1 database id (create if missing, delete stale binding)
+=======
+      - name: Resolve D1 database id (create if missing)
+>>>>>>> origin/main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
