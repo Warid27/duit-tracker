@@ -1,0 +1,14 @@
+{
+  "name": "duit — catat pengeluaranmu",
+  "short_name": "duit",
+  "description": "Aplikasi pencatat keuangan pribadi. Catat secepat mungkin, lihat duit lari ke mana.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#F7F4EE",
+  "theme_color": "#F7F4EE",
+  "lang": "id",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
